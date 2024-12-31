@@ -12,3 +12,5 @@ RoxygenNote: 7.3.2
 Imports:
 	dplyr,
 	stringi
+URL: https://github.com/tylerreed42/treedr
+BugReports: https://github.com/tylerreed42/treedr/issues
