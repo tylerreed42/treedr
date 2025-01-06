@@ -1,17 +1,3 @@
-#' Produce data summary of aglm model
-#'
-#' Produce a dataframe containing summary of selected fields given an aglm model, the associated dataframe that produced it, and a character list of columns to summarize.
-#' Applies the model's binning processes to the source data to facilitate one to one comparisons of model coefficients and raw data.
-#' 
-#' @param model aglm or cv.aglm object
-#' @param model_data dataframe that produced the aglm object
-#' @param summary_fields Character vector of field names to sum
-#' @return Dataframe containing all modeled variables and levels from the aglm object and the associated summarized variables from the model dataset.
-#' @export
-#' @examples
-#' data('Boston', package = 'MASS')
-#' model = cv.aglm(y = Boston$medv, x = Boston %>% select(-medv))
-#' data_summary = aglm_output_summary(model, Boston, summary_fields = c('crim','age'))
 
 aglm_data_summary = function(model, model_data, summary_fields = NULL){
 	data_summary = data.frame()
@@ -74,6 +60,24 @@ aglm_coef_summary = function(model, penalties = c(model@lambda.1se, model@lambda
 	}
 	return(coef_frame)
 }
+
+#' Produce data summary of aglm model
+#'
+#' Produce a dataframe containing summary of selected fields given an aglm model, the associated dataframe that produced it, and a character list of columns to summarize.
+#' Applies the model's binning processes to the source data to facilitate one to one comparisons of model coefficients and raw data.
+#' 
+#' @param model aglm or cv.aglm object
+#' @param model_data dataframe that produced the aglm object
+#' @param summary_fields Character vector of field names to sum
+#' @param penalties List of penalty levels for which to produce coefficients.  Equivalent to s in \link[aglm]{predict}.  Defaults to 
+#' showing coefficients for \code{lambda.1se}, \code{lambda.min}, and 0 penalty.
+#' @return Dataframe containing all modeled variables and levels from the aglm object and the associated summarized variables from the model dataset.
+#' @export
+#' @examples
+#' data('Boston', package = 'MASS')
+#' model = cv.aglm(y = Boston$medv, x = Boston %>% select(-medv))
+#' data_summary = aglm_output_summary(model, Boston, summary_fields = c('crim','age'))
+
 
 aglm_output_summary = function(model, model_data, summary_fields, penalties = c(model@lambda.1se, model@lambda.min, 0)){
 	out = cbind(
