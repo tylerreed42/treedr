@@ -45,7 +45,8 @@ connect_nb = function(geo, nb){
 	nb_out = nb
 	while(component_count > 1){
 		# find smallest component
-		geo_working = st_as_sf(geo) %>% mutate(id = 1:length(geo), comp.id = n.comp.nb(nb_out)$comp.id)
+		length_object = if(!is.null(nrow(geo))){nrow(geo)} else{length(geo)}
+		geo_working = st_as_sf(geo) %>% mutate(id = 1:length_object, comp.id = n.comp.nb(nb_out)$comp.id)
 		geo_comp = geo_working %>% st_drop_geometry()
 		comp_to_check = geo_comp %>%
 			group_by(comp.id) %>%
