@@ -9,7 +9,7 @@ remove_zeros = function(x){
 
 #' Connect neighborhoods
 #'
-#' This function "minimally" connects disconnected neighborhood objects.
+#' This function "minimally" connects disconnected neighborhood objects produced by \link[spdep]{poly2nb} and the like.
 #' The process finds the smallest connected component and searches for the shortest distance to
 #' any other component and then adds a neighboring relationship.  It iterates this until there is
 #' only a single connected component.

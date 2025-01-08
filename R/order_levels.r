@@ -11,6 +11,12 @@
 #' order_levels(sample_vector)
 #' @export
 order_levels = function(x){
-	indices = x %>% unique() %>% stri_extract_first_regex(.,'[0-9]+') %>% as.numeric() %>% order()
-	x %>% unique() %>% .[indices]
+	uniques = x %>% unique() %>% .[!is.na(.)] %>% as.character()
+	numerics_id = which(!(stri_extract_first_regex(uniques,'^[:digit:]+') %>% as.numeric() %>% is.na(.)))
+	numerics = uniques[numerics_id]
+	others = setdiff(uniques,numerics)
+	numerics_index = stri_extract_first_regex(numerics,'^[:digit:]+') %>% as.numeric() %>% order()
+	others_index = others %>% order() %>% add(length(numerics_index))
+	indices = c(numerics_index,others_index)
+	return(x %>% unique() %>% .[indices])
 }
