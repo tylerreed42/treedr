@@ -58,6 +58,11 @@ aglm_coef_summary = function(model, penalties = c(model@lambda.1se, model@lambda
 		names(coef_temp) = c('variable','level',penalty_id)
 		coef_frame = rbind(coef_frame,coef_temp)
 	}
+	#bandaid to handle when lambda.min is equal to lambda.1se
+	if(model@lambda.1se == model@lambda.min){
+		replace_index = which(names(coef_frame) == 's_1se')[2]
+		names(coef_frame)[replace_index] = 's_min'
+	}
 	return(coef_frame)
 }
 
