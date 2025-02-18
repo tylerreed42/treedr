@@ -37,12 +37,12 @@ aglm_coef_summary = function(model, penalties = c(model@lambda.1se, model@lambda
 		is_L = model@vars_info[[j]]$use_LV
 		is_O = model@vars_info[[j]]$use_OD
 		is_U = model@vars_info[[j]]$use_UD
-		if(length(model@lambda.1se) == 0){penalty_id = paste0('s_',sprintf('%.3f', penalties))
+		if(length(model@lambda.1se) == 0){penalty_id = paste0('s_',sprintf('%.5f', penalties))
 		} else{
 			penalty_id = case_when(
 				penalties == model@lambda.1se ~ 's_1se',
 				penalties == model@lambda.min ~ 's_min',
-				TRUE ~ paste0('s_',sprintf('%.3f', penalties)))}	
+				TRUE ~ paste0('s_',sprintf('%.5f', penalties)))}	
 		var_levels = if(is_U & is_O){
 			model@vars_info[[j]]$UD_info$levels %>% ordered(levels = model@vars_info[[j]]$OD_info$breaks %>% levels())
 			} else if(is_U){model@vars_info[[j]]$UD_info$levels
