@@ -64,8 +64,8 @@ connect_nb = function(geo, nb){
 		index_min = which.min(distances)
 		id_target = target_component[index_min,] %>% pull(id)
 		id_other = other_component[nearest[index_min],] %>% pull(id)
-		nb_out[[id_target]] = remove_zeros(c(id_other, nb_out[[id_target]]))
-		nb_out[[id_other]] = remove_zeros(c(id_target, nb_out[[id_other]]))
+		nb_out[[id_target]] = remove_zeros(c(id_other, nb_out[[id_target]])) %>% sort()
+		nb_out[[id_other]] = remove_zeros(c(id_target, nb_out[[id_other]])) %>% sort()
 		component_count = n.comp.nb(nb_out)$nc
 	}
 	return(nb_out)
