@@ -25,6 +25,9 @@ remove_zeros = function(x){
 #' @return Neighbors list consisting of a single connected component which respects the originally provided neighboring
 #' @export
 #' @examples
+#' library(sf)
+#' library(dplyr)
+#' library(spdep)
 #' geo = st_sfc(
 #' poly_a = st_polygon(list(rbind(c(0, 0), c(2, 0), c(2, 2), c(0, 2), c(0, 0)))),
 #' poly_b = st_polygon(list(rbind(c(2, 0), c(4, 0), c(4, 2), c(2, 2), c(2, 0)))),
